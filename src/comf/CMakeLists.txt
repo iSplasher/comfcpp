@@ -1,14 +1,13 @@
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set( TARGET_NAME comf )
 
 add_library( ${TARGET_NAME} STATIC "" )
 
 target_include_directories( ${TARGET_NAME} BEFORE PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/detail>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/detail>
     $<INSTALL_INTERFACE:include/${TARGET_NAME}/detail>
     )
 target_include_directories( ${TARGET_NAME} PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
     $<INSTALL_INTERFACE:include/${TARGET_NAME}>
     )
 
