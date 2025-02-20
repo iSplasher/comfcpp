@@ -98,6 +98,7 @@ function( build_test_target )
         else ()
             message( CHECK_PASS "... enabled for: ${F_ARG_ALL_TARGETS}" )
         endif ()
+        set( ${ret} TRUE )
     else ()
         message( CHECK_FAIL "... not enabling tests" )
         if (F_ARG_DISABLE_ALL)
@@ -105,7 +106,6 @@ function( build_test_target )
         endif ()
     endif ()
 
-    set( ${ret} TRUE )
     return( PROPAGATE ${ret} )
 endfunction()
 
@@ -153,12 +153,13 @@ macro( setup_tests )
     if (ENABLE_TESTS)
         message( STATUS "Configuring tests" )
 
-        add_compile_definitions( APP_TESTING )
         add_executable( ${TEST_TARGET_MAIN_NAME} )
+        target_compile_definitions( ${TEST_TARGET_MAIN_NAME} PUBLIC APP_TESTING)
         # These tests can use the Catch2-provided main
         target_link_libraries( ${TEST_TARGET_MAIN_NAME} PRIVATE Catch2::Catch2WithMain )
 
         include( CTest )
+
         enable_testing()
 
         include( ${Catch2_DIR}/Catch.cmake )
@@ -214,6 +215,8 @@ function( add_test_target )
 
             get_target_property( ${target}_SOURCES ${target} SOURCES )
             add_library( ${target}-tests STATIC ${${target}_SOURCES} )
+            target_compile_definitions( ${target}-tests PUBLIC APP_TESTING)
+
             get_target_property( ${target}_INCLUDE_DIR ${target} INCLUDE_DIRECTORIES )
             target_include_directories( ${target}-tests
                 PUBLIC ${${target}_INCLUDE_DIR}

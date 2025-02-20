@@ -5,7 +5,7 @@ set( headers_only OFF )
 vcpkg_from_git(
     OUT_SOURCE_PATH SOURCE_PATH
     URL "${SRC_PATH}"
-    REF "a4ac8d3475c502c56435b53b9147acc7ebd62cdb"
+    REF "e820d8850a58fc2fdd4fe7c8da7c98d3e07d221c"
     )
 
 #vcpkg_replace_string( ${SOURCE_PATH}/ <match> <replace> [REGEX] [IGNORE_UNCHANGED])
