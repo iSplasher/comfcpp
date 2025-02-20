@@ -1,0 +1,139 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "common",
+      "hidden": true,
+      "cacheVariables": {
+        "BUILD_TESTING": false,
+        "USE_CPPFRONT": false,
+        "ENABLE_MODULES": false,
+        "CMAKE_TOOLCHAIN_FILE": {
+          "value": "${sourceDir}/build-config/toolchains/bootstrap.cmake",
+          "type": "FILEPATH"
+        },
+        "ADD_CMAKE_C_FLAGS": "-fsafe-buffer-usage-suggestions -finput-charset=utf-8 -fdiagnostics-show-option -fdiagnostics-fixit-info -Wdeprecated -fcolor-diagnostics",
+        "ADD_CMAKE_C_FLAGS_RELEASE": "",
+        "ADD_CMAKE_C_FLAGS_DEBUG": "-fdebug-macro",
+        "ADD_CMAKE_CXX_FLAGS": "-fstrict-return -fsafe-buffer-usage-suggestions -finput-charset=utf-8 -fdiagnostics-show-option -fdiagnostics-fixit-info -Wdeprecated -fcolor-diagnostics",
+        "ADD_CMAKE_CXX_FLAGS_RELEASE": "",
+        "ADD_CMAKE_CXX_FLAGS_DEBUG": "-ftemplate-backtrace-limit=0 -gfull -fstandalone-debug  -fexperimental-library  -fdebug-macro"
+      }
+    },
+    {
+      "name": "common_os",
+      "hidden": true,
+      "cacheVariables": {
+        "WINDOWS": false,
+        "LINUX": false,
+        "MACOS": false,
+
+        "ADD_PLAT_CMAKE_C_FLAGS": "",
+        "ADD_PLAT_CMAKE_C_FLAGS_RELEASE": "",
+        "ADD_PLAT_CMAKE_C_FLAGS_DEBUG": "",
+        "ADD_PLAT_CMAKE_CXX_FLAGS": "",
+        "ADD_PLAT_CMAKE_CXX_FLAGS_RELEASE": "",
+        "ADD_PLAT_CMAKE_CXX_FLAGS_DEBUG": ""
+      }
+    },
+    {
+      "name": "linux",
+      "hidden": true,
+      "inherits": [
+        "common_os"
+      ],
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-linux",
+        "LINUX": true
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "windows",
+      "hidden": true,
+      "inherits": [
+        "common_os"
+      ],
+      "generator": "Ninja",
+      "cacheVariables": {
+        "WINDOWS": true,
+        "VCPKG_TARGET_TRIPLET": "x64-windows-clang",
+        "BUILD_SHARED_LIBS": true,
+        "ADD_PLAT_CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc -fms-compatibility -fansi-escape-codes",
+        "ADD_PLAT_CMAKE_CXX_FLAGS_DEBUG": "-gdwarf-3",
+        "ADD_PLAT_CMAKE_CXX_FLAGS_RELEASE": ""
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "macos",
+      "hidden": true,
+      "inherits": [
+        "common_os"
+      ],
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-osx",
+        "MACOS": true
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "binaryDir": "${sourceDir}/build/debug",
+      "inherits": [
+        "common",
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_BUILD_TYPE": "debug",
+        "BUILD_TESTING": true
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "binaryDir": "${sourceDir}/build/release",
+      "inherits": [
+        "common",
+        "windows",
+        "linux",
+        "macos"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "VCPKG_BUILD_TYPE": "release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-library",
+      "displayName": "Library (Debug)",
+      "configurePreset": "debug",
+      "verbose": true
+    },
+    {
+      "name": "release-library",
+      "displayName": "Libary (Release)",
+      "configurePreset": "release",
+      "configuration": "",
+      "cleanFirst": true
+    }
+  ]
+}

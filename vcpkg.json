@@ -1,0 +1,67 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "builtin-baseline": "9df46ca3f4ec3bd05984e5668218630c52ea302a",
+  "name": "comfcpp",
+  "version-date": "2025-02-20",
+  "vcpkg-configuration": {
+    "overlay-ports": [
+      "build-config/ports"
+    ],
+    "overlay-triplets": [
+      "build-config/triplets"
+    ]
+  },
+  "dependencies": [
+    {
+      "name": "catch2",
+      "version>=": "3.5.3",
+      "default-features": false
+    },
+    {
+      "name": "spdlog",
+      "version>=": "1.14.1",
+      "default-features": false,
+      "features": [
+        {
+          "name": "wchar",
+          "platform": "windows"
+        }
+      ]
+    },
+    {
+      "name": "boost-hana",
+      "version>=": "1.85.0"
+    },
+    {
+      "name": "fmt",
+      "version>=": "10.2.1#2"
+    },
+    {
+      "name": "value-types",
+      "version>=": "0.0.1"
+    },
+    {
+      "name": "function2",
+      "version>=": "4.2.4"
+    },
+    {
+      "name": "glaze",
+      "version>=": "4.3.1",
+      "features": [
+        "avx2"
+      ]
+    },
+    {
+      "name": "taskflow",
+      "version>=": "3.9.0"
+    },
+    {
+      "name": "ztd-text"
+    },
+    {
+      "name": "comf",
+      "version>=": "2025-02-20"
+    }
+  ],
+  "overrides": []
+}
