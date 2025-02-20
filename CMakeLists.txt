@@ -17,6 +17,8 @@ set( CMAKE_CXX_STANDARD 23 )
 set( CMAKE_CXX_STANDARD_REQUIRED ON )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
+option( ENABLE_MODULES "Enable modules" OFF )
+
 if (ENABLE_MODULES)
     # Tell CMake that we explicitly want `import std`. This will initialize the
     # property on all targets declared after this to 1
@@ -63,9 +65,6 @@ if (VCPKG_TARGET_TRIPLET MATCHES "clang" AND NOT CMAKE_CXX_COMPILER MATCHES "cla
     elseif (LLVMInstallDir)
         set( CMAKE_CXX_COMPILER ${LLVMInstallDir}/bin/clang++ )
         set( CMAKE_C_COMPILER ${LLVMInstallDir}/bin/clang )
-    else ()
-        set( CMAKE_CXX_COMPILER clang++ )
-        set( CMAKE_C_COMPILER clang )
     endif ()
 endif ()
 
@@ -211,7 +210,7 @@ macro( disable_target )
         )
 endmacro()
 
-include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/tests.cmake )
+include( ${CMAKE_CURRENT_LIST_DIR}/build-config/cmake/tests.cmake )
 setup_tests( TARGET tests )
 
 # -------------------------------------------------------
