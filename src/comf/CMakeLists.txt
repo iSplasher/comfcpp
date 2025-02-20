@@ -1,3 +1,4 @@
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set( TARGET_NAME comf )
 
 add_library( ${TARGET_NAME} STATIC "" )

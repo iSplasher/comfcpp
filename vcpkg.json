@@ -59,7 +59,7 @@
       "name": "ztd-text"
     },
     {
-      "name": "comf",
+      "name": "comf-test",
       "version>=": "2025-02-20"
     }
   ],
