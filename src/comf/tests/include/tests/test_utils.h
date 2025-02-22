@@ -16,11 +16,11 @@
 #include <initializer_list>
 
 
-#include "common/constants.h"
+#include "comf/constants.h"
 
 
 namespace
-APP_NAMESPACE {
+COMF_NAMESPACE {
 
 // helper
 template< typename T, typename Context, typename Formatter = Context::template formatter_type< std::remove_const_t< T > > >
@@ -41,7 +41,7 @@ concept Formattable = FormattableWithHelper< std::remove_reference_t< T >, fmt::
 // Catch2 StringMaker specialization
 namespace Catch {
 
-template< APP_NAMESPACE::Formattable T >
+template< COMF_NAMESPACE::Formattable T >
 struct StringMaker< T > {
     static std::string convert( const T &t ) {
         return fmt::format( "{}", t );

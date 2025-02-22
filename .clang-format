@@ -92,7 +92,7 @@ SpacesInCStyleCastParentheses: true
 SpacesInParentheses: true
 StatementAttributeLikeMacros:
   - Q_EMIT
-  - APP_NAMESPACE
+  - COMF_NAMESPACE
 StatementMacros:
   - Q_UNUSED
   - QT_REQUIRE_VERSION
@@ -105,5 +105,5 @@ WhitespaceSensitiveMacros:
   - BOOST_PP_STRINGIZE
   - NS_SWIFT_NAME
   - CF_SWIFT_NAME
-  - APP_NAMESPACE
+  - COMF_NAMESPACE
 ...

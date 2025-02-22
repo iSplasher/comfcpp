@@ -1,18 +1,17 @@
-# from https://github.com/microsoft/vcpkg/pull/31028
-
 set( VCPKG_TARGET_ARCHITECTURE x64 )
 set( VCPKG_CRT_LINKAGE dynamic )
 set( VCPKG_LIBRARY_LINKAGE dynamic )
 
-if (NOT PORT MATCHES "python3")
-    set( VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_CURRENT_LIST_DIR}/../toolchains/clang.cmake" )
-    set( VCPKG_LOAD_VCVARS_ENV ON )
-    if (DEFINED VCPKG_PLATFORM_TOOLSET)
-        set( VCPKG_PLATFORM_TOOLSET ClangCL )
-    endif ()
-    set( VCPKG_QT_TARGET_MKSPEC win32-clang-msvc )
-endif ()
+set( VCPKG_LOAD_VCVARS_ENV ON ) # Setting VCPKG_CHAINLOAD_TOOLCHAIN_FILE deactivates automatic vcvars setup so reenable it!
 
-set( VCPKG_ENV_PASSTHROUGH_UNTRACKED "VCPKG_ROOT;LLVMInstallDir;LLVMToolsVersion" )
+#if (DEFINED VCPKG_PLATFORM_TOOLSET) # Tricks vcpkg to load vcvars for a VCPKG_PLATFORM_TOOLSET which is not vc14[0-9]
+#    set( VCPKG_PLATFORM_TOOLSET ClangCL )
+#endif ()
+
+
+set( INSIDE_TRIPLET ON )
 
 include( "${CMAKE_CURRENT_LIST_DIR}/../port-specializations.cmake" )
+
+include( "${CMAKE_CURRENT_LIST_DIR}/../toolchains/bootstrap.cmake" )
+

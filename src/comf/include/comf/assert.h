@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include "comf/private/_constants.h"
 
 
 #ifdef DEBUG
@@ -22,14 +23,14 @@
 #define app_assert_default_action AssertAction::AssertAction::Throw
 #endif
 
-#include "private/_assert.h"
+#include "comf/private/_assert.h"
 
 using AssertException = ppk::assert::AssertionException;
 
 //
 
 
-namespace comf::impl {
+namespace COMF_NAMESPACE::impl {
 
 APP_ASSERT_NAMESPACE::AssertAction::AssertAction app_assert_handler(
     const char* file,

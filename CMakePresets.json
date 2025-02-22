@@ -12,10 +12,10 @@
           "value": "${sourceDir}/build-config/toolchains/bootstrap.cmake",
           "type": "FILEPATH"
         },
-        "ADD_CMAKE_C_FLAGS": "-fsafe-buffer-usage-suggestions -finput-charset=utf-8 -fdiagnostics-show-option -fdiagnostics-fixit-info -Wdeprecated -fcolor-diagnostics",
+        "ADD_CMAKE_C_FLAGS": "-fdiagnostics-show-category=name -fcolor-diagnostics -fsafe-buffer-usage-suggestions -finput-charset=utf-8 -fdiagnostics-show-option -fdiagnostics-fixit-info -Wdeprecated -fcolor-diagnostics",
         "ADD_CMAKE_C_FLAGS_RELEASE": "",
         "ADD_CMAKE_C_FLAGS_DEBUG": "-fdebug-macro",
-        "ADD_CMAKE_CXX_FLAGS": "-fstrict-return -fsafe-buffer-usage-suggestions -finput-charset=utf-8 -fdiagnostics-show-option -fdiagnostics-fixit-info -Wdeprecated -fcolor-diagnostics",
+        "ADD_CMAKE_CXX_FLAGS": " -fdiagnostics-show-category=name -fcolor-diagnostics -fstrict-return -fsafe-buffer-usage-suggestions -finput-charset=utf-8 -fdiagnostics-show-option -fdiagnostics-fixit-info -Wdeprecated -fcolor-diagnostics",
         "ADD_CMAKE_CXX_FLAGS_RELEASE": "",
         "ADD_CMAKE_CXX_FLAGS_DEBUG": "-ftemplate-backtrace-limit=0 -gfull -fstandalone-debug  -fexperimental-library  -fdebug-macro"
       }
@@ -61,9 +61,9 @@
       "generator": "Ninja",
       "cacheVariables": {
         "WINDOWS": true,
-        "VCPKG_TARGET_TRIPLET": "x64-windows-clang",
+        "VCPKG_TARGET_TRIPLET": "x64-clangcl-dynamic",
         "BUILD_SHARED_LIBS": true,
-        "ADD_PLAT_CMAKE_CXX_FLAGS": "-target x86_64-pc-windows-msvc -fms-compatibility -fansi-escape-codes",
+        "ADD_PLAT_CMAKE_CXX_FLAGS": "-fansi-escape-codes",
         "ADD_PLAT_CMAKE_CXX_FLAGS_DEBUG": "-gdwarf-3",
         "ADD_PLAT_CMAKE_CXX_FLAGS_RELEASE": ""
       },

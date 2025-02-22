@@ -19,7 +19,7 @@
     },
     {
       "name": "spdlog",
-      "version>=": "1.14.1",
+      "version>=": "1.15.1",
       "default-features": false,
       "features": [
         {

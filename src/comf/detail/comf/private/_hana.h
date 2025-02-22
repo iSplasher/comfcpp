@@ -31,6 +31,14 @@ template< typename T >
 using Integral = impl::hana::IntegralConstant< T >;
 
 
+// Concept for Hana-compatible string types
+template< typename T >
+concept IsHanaStringCompatible = requires( T t )
+{
+    { meta::impl::hana::is_a< meta::impl::hana::string_tag >( t ) } -> std::same_as< bool >;
+};
+
+
 template< typename T >
 concept UnsignedIntegral = Integral< T >::value && impl::hana::size_c< 0 > <= Integral< T >::value;
 
@@ -106,16 +114,16 @@ struct type_value_index {
     std::type_index idx;
 
     template< typename T >
-    constexpr type_value_index( const T& v ) noexcept
+    constexpr type_value_index( const T &v ) noexcept
         requires ( IsTypeValue< T > )
         : idx( typeid( v ) ) { }
 
-    constexpr type_value_index( const type_value_index& other ) noexcept
+    constexpr type_value_index( const type_value_index &other ) noexcept
         : idx( other.idx ) { }
 
-    auto operator<=>( const type_value_index& other ) const noexcept = default;
+    auto operator<=>( const type_value_index &other ) const noexcept = default;
 
-    constexpr bool operator==( const type_value_index& other ) const noexcept {
+    constexpr bool operator==( const type_value_index &other ) const noexcept {
         return idx == other.idx;
     }
 
@@ -140,13 +148,13 @@ IMPLEMENTATION_START
     struct reveal_h_type_impl {
 
         template< typename T >
-        decltype(auto) operator()( const T& t ) const
+        decltype(auto) operator()( const T &t ) const
             requires ( IsTypeValue< T > ) {
             return +t;
         }
 
         template< typename T >
-        std::remove_cvref_t< T > operator()( const T& t ) const
+        std::remove_cvref_t< T > operator()( const T &t ) const
             requires ( !IsTypeValue< T > ) {
             return t;
         }
@@ -167,12 +175,12 @@ IMPLEMENTATION_START
 
     struct is_type_base_of_impl {
         template< typename Base, typename Derived >
-        constexpr decltype(auto) operator()( Base&& base, Derived&& derived ) const {
+        constexpr decltype(auto) operator()( Base &&base, Derived &&derived ) const {
             return std::is_base_of_v< std::remove_cvref_t< Base >, std::remove_cvref_t< Derived > >;
         }
 
         template< typename Base, typename Derived >
-        constexpr decltype(auto) operator()( type_value_t< Base >&& base, type_value_t< Derived >&& derived ) const {
+        constexpr decltype(auto) operator()( type_value_t< Base > &&base, type_value_t< Derived > &&derived ) const {
             return std::is_base_of_v< std::remove_cvref_t< Base >, std::remove_cvref_t< Derived > >;
         }
     };
@@ -311,7 +319,7 @@ struct std::common_type< COMF_NAMESPACE::meta::impl::hana::basic_tuple< AA >, CO
 // Custom specialization of std::hash can be injected in namespace std.
 template<>
 struct std::hash< COMF_NAMESPACE::meta::type_value_index > {
-    std::size_t operator()( const COMF_NAMESPACE::meta::type_value_index& s ) const noexcept {
+    std::size_t operator()( const COMF_NAMESPACE::meta::type_value_index &s ) const noexcept {
         return s.hash_code();
     }
 };

@@ -8,7 +8,7 @@
 
 #include <comf/constants.h>
 
-#include "comf/test/test_utils.h"
+#include "tests/test_utils.h"
 
 
 using namespace COMF_NAMESPACE;

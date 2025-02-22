@@ -11,7 +11,7 @@
 
 using namespace COMF_NAMESPACE;
 
-APP_ASSERT_NAMESPACE::AssertAction::AssertAction COMF_NAMESPACE::impl::app_assert_handler(
+APP_ASSERT_NAMESPACE::AssertAction::AssertAction COMF_NAMESPACE::IMPL_NAMESPACE::app_assert_handler(
     const char* file,
     int         line,
     const char* function,

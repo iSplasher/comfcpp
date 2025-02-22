@@ -14,7 +14,7 @@
 #include <type_traits>
 
 #include "comf/constants.h"
-#include "private/_hana.h"
+#include "comf/private/_hana.h"
 
 
 namespace

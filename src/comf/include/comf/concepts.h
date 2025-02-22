@@ -12,8 +12,8 @@
 #include <fmt/compile.h>
 
 #include "comf/constants.h"
-#include "private/_experimental_std.h"
-#include "private/_hana.h"
+#include "comf/private/_experimental_std.h"
+#include "comf/private/_hana.h"
 
 
 namespace

@@ -47,8 +47,16 @@ set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ADD_PLAT_CMAKE_CXX_FLAGS}" )
 set( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${ADD_PLAT_CMAKE_CXX_FLAGS_DEBUG}" )
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${ADD_PLAT_CMAKE_CXX_FLAGS_RELEASE}" )
 
-
 include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/tools.cmake )
+include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/utils.cmake )
+
+
+gnu_to_clangcl( ${CMAKE_C_FLAGS} CMAKE_C_FLAGS )
+gnu_to_clangcl( ${CMAKE_C_FLAGS_RELEASE} CMAKE_C_FLAGS_RELEASE )
+gnu_to_clangcl( ${CMAKE_C_FLAGS_DEBUG} CMAKE_C_FLAGS_DEBUG )
+gnu_to_clangcl( ${CMAKE_CXX_FLAGS} CMAKE_CXX_FLAGS )
+gnu_to_clangcl( ${CMAKE_CXX_FLAGS_DEBUG} CMAKE_CXX_FLAGS_DEBUG )
+gnu_to_clangcl( ${CMAKE_CXX_FLAGS_RELEASE} CMAKE_CXX_FLAGS_RELEASE )
 
 
 # -------------------------------------------------------
@@ -130,9 +138,9 @@ add_compile_definitions(
 # if compiler is clang
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "ClangCL")
     add_compile_options(
-        -Wthread-safety # Enable -Wthread-safety annotations on libc++’s std::mutex and std::lock_guard
-        -Werror=return-type # Treat return type mismatch as errors
-        -frelaxed-template-template-args # https://github.com/llvm/llvm-project/issues/42224
+        /clang:-Wthread-safety # Enable -Wthread-safety annotations on libc++’s std::mutex and std::lock_guard
+        /clang:-Werror=return-type # Treat return type mismatch as errors
+        /clang:-frelaxed-template-template-args # https://github.com/llvm/llvm-project/issues/42224
         )
 endif ()
 
@@ -140,7 +148,7 @@ if (ENABLE_MODULES)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "ClangCL")
 
         add_compile_options(
-            -fmodules-ts
+            /clang:-fmodules-ts
             )
     endif ()
 endif ()
@@ -168,15 +176,6 @@ if (WINDOWS)
             /source-charset:utf-8
             )
     endif ()
-endif ()
-
-# -------------------------------------------------------
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    add_compile_options(
-        -fdiagnostics-show-category=name # Show the category name for each diagnostic
-        -fcolor-diagnostics # Use colors in diagnostics
-        )
 endif ()
 
 # -------------------------------------------------------

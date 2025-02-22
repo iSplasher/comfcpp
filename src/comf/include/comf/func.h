@@ -10,7 +10,7 @@
 
 #include "comf/constants.h"
 #include "comf/concepts.h"
-#include "private/_hana.h"
+#include "comf/private/_hana.h"
 
 
 namespace

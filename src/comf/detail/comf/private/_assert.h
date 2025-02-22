@@ -46,6 +46,8 @@
 
 */
 
+#pragma once
+
 #if !defined(app_assert_enabled)
   #if !defined(NDEBUG) // if we are in debug mode
     #define app_assert_enabled 1 // enable them
@@ -65,6 +67,7 @@
 
 #if defined(__clang__)
   #pragma GCC diagnostic ignored "-Wgnu-zero-variadic-macro-arguments"
+  #pragma GCC diagnostic ignored "-Wdeprecated-dynamic-exception-spec"
 #endif
 
 #if !defined(app_assert_h)
