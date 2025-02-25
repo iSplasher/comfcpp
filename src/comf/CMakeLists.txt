@@ -38,6 +38,7 @@ target_sources( ${TARGET_NAME}
 add_cppfront_target( ${TARGET_NAME} SOURCES detail include src )
 
 find_package( spdlog CONFIG REQUIRED )
+target_find_deps( ${TARGET_NAME} REQUIRED DEPS spdlog )
 target_link_libraries( ${TARGET_NAME} PRIVATE spdlog::spdlog )
 
 find_package( fmt CONFIG REQUIRED )
@@ -46,15 +47,19 @@ target_link_libraries( ${TARGET_NAME} PUBLIC fmt::fmt )
 
 find_package( ztd.text CONFIG REQUIRED )
 find_package( ztd.cuneicode CONFIG REQUIRED )
+target_find_deps( ${TARGET_NAME} REQUIRED DEPS ztd.text ztd.cuneicode )
 target_link_libraries( ${TARGET_NAME} PRIVATE ztd::text ztd::cuneicode )
 
 find_package( function2 CONFIG REQUIRED )
+target_find_deps( ${TARGET_NAME} REQUIRED DEPS function2 )
 target_link_libraries( ${TARGET_NAME} PRIVATE function2::function2 )
 
 find_package( Hana CONFIG REQUIRED )
+target_find_deps( ${TARGET_NAME} REQUIRED DEPS hana )
 target_link_libraries( ${TARGET_NAME} PRIVATE hana )
 
 find_package( xyz_value_types CONFIG REQUIRED )
+target_find_deps( ${TARGET_NAME} REQUIRED DEPS xyz_value_types )
 target_link_libraries( ${TARGET_NAME} PRIVATE xyz_value_types::xyz_value_types )
 
 add_test_target( TARGETS ${TARGET_NAME} )

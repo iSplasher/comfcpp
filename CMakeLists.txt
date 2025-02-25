@@ -49,6 +49,7 @@ set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} ${ADD_PLAT_CMAKE_CXX_FL
 
 include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/tools.cmake )
 include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/utils.cmake )
+include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/install-config.cmake )
 
 
 gnu_to_clangcl( ${CMAKE_C_FLAGS} CMAKE_C_FLAGS )
@@ -217,7 +218,6 @@ setup_tests( TARGET tests )
 add_subdirectory( src/comf )
 
 # -------------------------------------------------------
-include( ${CMAKE_CURRENT_SOURCE_DIR}/build-config/cmake/install-config.cmake )
 
 set(COMF_CMAKE_DIR "$\{CMAKE_CURRENT_LIST_DIR\}/util")
 configure_package_install( comf
