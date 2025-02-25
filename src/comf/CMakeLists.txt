@@ -8,7 +8,7 @@ target_include_directories( ${TARGET_NAME} BEFORE PUBLIC
     )
 target_include_directories( ${TARGET_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
-    $<INSTALL_INTERFACE:include/${TARGET_NAME}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${TARGET_NAME}>
     )
 
 file( GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp )
