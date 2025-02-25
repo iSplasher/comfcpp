@@ -30,10 +30,12 @@ include_guard( GLOBAL )
 # ==================================================
 include(CMakeFindDependencyMacro)
 
-if (@COMF_CMAKE_DIR@)
+if (EXISTS @COMF_CMAKE_DIR@)
     include( "@COMF_CMAKE_DIR@/tests.cmake" )
     include( "@COMF_CMAKE_DIR@/tools.cmake" )
     include( "@COMF_CMAKE_DIR@/utils.cmake" )
+    include( "@COMF_CMAKE_DIR@/install-config.cmake" )
+    include( "@COMF_CMAKE_DIR@/python.cmake" )
 endif()
 
 @FIND_DEPS_CONTENT@
@@ -71,7 +73,7 @@ endforeach()
     ]=] )
 
     set( CONFIG_IN_CONTENT_NO_COMP [=[
-    include("${CMAKE_CURRENT_LIST_DIR}/@LibraryName@-targets.cmake" OPTIONAL RESULT_VARIABLE @LibraryName@_FOUND)
+ include("${CMAKE_CURRENT_LIST_DIR}/@LibraryName@-targets.cmake" OPTIONAL RESULT_VARIABLE @LibraryName@_FOUND)
     ]=] )
 
     if (LibraryComponents)
