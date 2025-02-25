@@ -73,7 +73,8 @@ endforeach()
     ]=] )
 
     set( CONFIG_IN_CONTENT_NO_COMP [=[
- include("${CMAKE_CURRENT_LIST_DIR}/@LibraryName@-targets.cmake" OPTIONAL RESULT_VARIABLE @LibraryName@_FOUND)
+ include("${CMAKE_CURRENT_LIST_DIR}/@LibraryName@-targets.cmake")
+ set(@LibraryName@_FOUND TRUE)
     ]=] )
 
     if (LibraryComponents)
