@@ -20,7 +20,7 @@ macro( configure_package_install library_name )
     set( LibraryRequiredComponents ${CONFIG_REQUIRED_COMPONENTS} )
 
     set( LibraryInstallCmakeDir "${CMAKE_INSTALL_LIBDIR}/cmake/${LibraryName}" )
-    set( LibraryInstallIncludeDir "${CMAKE_INSTALL_INCLUDEDIR}/" )
+    set( LibraryInstallIncludeDir "${CMAKE_INSTALL_INCLUDEDIR}" )
 
     set( CONFIG_IN_CONTENT [=[
 include_guard( GLOBAL )
